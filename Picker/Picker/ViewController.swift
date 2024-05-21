@@ -24,12 +24,12 @@ class ViewController: UIViewController {
         button.configuration = config
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.addAction(UIAction{ [weak self] _ in
+        button.addAction(UIAction{ [unowned self] _ in
             let colorPicker = UIColorPickerViewController()
             colorPicker.delegate = self
             colorPicker.supportsAlpha = false
-            colorPicker.selectedColor = self?.view.backgroundColor ?? .white
-            self?.present(colorPicker, animated: true)
+            colorPicker.selectedColor = self.view.backgroundColor ?? .white
+            self.present(colorPicker, animated: true)
         }, for: .touchUpInside)
         
         self.view.addSubview(button)
