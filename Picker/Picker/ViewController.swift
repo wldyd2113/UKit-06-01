@@ -30,11 +30,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         ])
 
     }
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { //피커 수
         2
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { //내용물 개수
         switch component {
         case 0:
             return options.count
