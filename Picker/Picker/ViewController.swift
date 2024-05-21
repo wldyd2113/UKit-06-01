@@ -19,8 +19,13 @@ class ViewController: UIViewController {
         
         let today = Date()
         var dateComponents = DateComponents()
+        dateComponents.year = -1
+        let oneYearAgo = Calendar.current.date(byAdding: dateComponents, to: today)
         dateComponents.year = 1
         let oneYearFromNow = Calendar.current.date(byAdding: dateComponents, to: today)
+        
+        datePicker.minimumDate = oneYearAgo
+        datePicker.maximumDate = oneYearFromNow
         
         datePicker.addAction(UIAction {[weak self] _ in
             print("sender: \(self?.datePicker.date.formatted() ?? "N/A)")")
