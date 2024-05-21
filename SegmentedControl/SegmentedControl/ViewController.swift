@@ -44,8 +44,7 @@ class ViewController: UIViewController {
             default:
                 break
             }
-            let tintColor: UIColor = (self?.view.backgroundColor?.appropriateTintColor())!
-            let normalTextAttribute: [NSAttributedString.Key: Any] = [.foregroundColor: tintColor]
+            let normalTextAttribute: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white]
             self?.segmentedControl.setTitleTextAttributes(normalTextAttribute, for: .normal)
         }, for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
