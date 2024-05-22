@@ -22,19 +22,8 @@ class ViewController: UIViewController {
     }
 
     @objc func handleGesture(_ sender: UIPinchGestureRecognizer) {
-        guard let view = sender.view else { return }
-        let currentScale = sqrt(view.transform.a * view.transform.a + view.transform.c * view.transform.c)
-        if sender.scale < 1.0  {
-            if currentScale > 0.8 {
-                view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
-            }
-        } else {
-            if currentScale < 1.2 {
-                view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
-            }
-        }
-    }
 
+    }
 }
 
 
