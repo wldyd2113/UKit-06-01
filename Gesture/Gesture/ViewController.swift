@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         else {
             if currentScale < 1.2 {
                 view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
+            }
         }
     }
 }
