@@ -19,13 +19,14 @@ class ViewController: UIViewController {
         
         view.addSubview(rectangle)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGesture.numberOfTapsRequired = 2 //tap을 하는 최소한의 횟수
-        rectangle.addGestureRecognizer(tapGesture)
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleTap))
+        gesture.minimumPressDuration = 2.0
+        rectangle.addGestureRecognizer(gesture)
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        if let view = sender.view {
+    @objc func handleTap(_ sender: UILongPressGestureRecognizer) {
+        print("\(sender.state)")
+        if let view = sender.view, sender.state == .began {
             view.backgroundColor = (view.backgroundColor == .yellow) ? .red : .yellow
         }
     }
