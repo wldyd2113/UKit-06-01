@@ -8,11 +8,10 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource {
-    
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: view.bounds ,style: .insetGrouped)
+        let tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         tableView.dataSource = self
-        tableView.register(UITableView.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
     
@@ -30,6 +29,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         view.addSubview(tableView)
     }
     
+    // MARK: UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         3
     }
@@ -58,8 +58,10 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
         return cell
     }
+    
     
     // 액션 개체 생성 / 삭제 코드 추가
     override func viewIsAppearing(_ animated: Bool) {
