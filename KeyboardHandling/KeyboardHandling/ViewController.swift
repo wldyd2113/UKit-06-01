@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     let textField = UITextField()
+    lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapHandler)) //키보드 내리는 gesture
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,21 +28,20 @@ class ViewController: UIViewController {
 
         ])
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapHandler)) //키보드 내리는 gesture
-        view.addGestureRecognizer(tapGesture)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilShow), name: UIResponder.keyboardWillShowNotification, object: nil) //키보드를 올림
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilHide), name: UIResponder.keyboardWillHideNotification, object: nil) //키보드 내림
     }
     
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
+        view.addGestureRecognizer(tapGesture)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilShow), name: UIResponder.keyboardWillShowNotification, object: nil) //키보드를 올림
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilHide), name: UIResponder.keyboardWillHideNotification, object: nil) //키보드 내림
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        view.removeGestureRecognizer(tapGesture)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilShow), name: UIResponder.keyboardWillShowNotification, object: nil) //키보드를 올림
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilHide), name: UIResponder.keyboardWillHideNotification, object: nil) //키보드 내림
     }
