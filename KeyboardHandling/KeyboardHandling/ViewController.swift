@@ -34,6 +34,18 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilHide), name: UIResponder.keyboardWillHideNotification, object: nil) //키보드 내림
     }
     
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilShow), name: UIResponder.keyboardWillShowNotification, object: nil) //키보드를 올림
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilHide), name: UIResponder.keyboardWillHideNotification, object: nil) //키보드 내림
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilShow), name: UIResponder.keyboardWillShowNotification, object: nil) //키보드를 올림
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWilHide), name: UIResponder.keyboardWillHideNotification, object: nil) //키보드 내림
+    }
+    
     @objc func tapHandler(_ sender: UIView) {
         textField.resignFirstResponder()
     }
