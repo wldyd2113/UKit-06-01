@@ -18,10 +18,12 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     let formOneLabel = UILabel()
     let formOneTextField = UITextField()
+    let formOneSwitch = UISwitch()
     let formTwoLabel = UILabel()
     let formTwoTextField = UITextField()
     let resultLabelOne = UILabel()
     let resultLabelTwo = UILabel()
+    let resultButton = UIButton(type: .system)
     lazy var textFieldAction = UIAction(handler: textFieldDidChange)
     
     override func viewDidLoad() {
@@ -36,7 +38,19 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        if section == 0 {
+            return 3
+        }
+        switch section {
+        case 0:
+            return 3
+        case 1:
+            return formOneSwitch.isOn ? 2 : 0
+        case 2:
+            return 3
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -51,7 +65,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         case 0:
             return "폼 #1"
         case 1:
-            return "폼 #2"
+            return formOneSwitch.isOn ? "폼 #2" : nil
         default:
             return nil
         }
@@ -59,6 +73,8 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell.contentView.subviews.forEach({ view in view.removeFromSuperview()})
         
         switch indexPath.section {
         case 0:
@@ -108,6 +124,16 @@ class ViewController: UIViewController, UITableViewDataSource {
                 formOneTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
                 formOneTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
             ])
+        case 2:
+            formOneSwitch.translatesAutoresizingMaskIntoConstraints = false
+            
+            formOneSwitch.addAction(UIAction { [weak self] _ in self?.tableView.reloadData() }, for: .valueChanged)
+            
+            view.addSubview(formOneSwitch)
+            NSLayoutConstraint.activate([
+                formOneSwitch.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                formOneSwitch.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            ])
         default:
             break
         }
@@ -134,6 +160,17 @@ class ViewController: UIViewController, UITableViewDataSource {
                 formTwoTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
                 formTwoTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
                 formTwoTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            ])
+        case 2:
+            resultButton.translatesAutoresizingMaskIntoConstraints = false
+
+            resultButton.setTitle("클릭하세요.", for: .normal)
+            resultButton.isEnabled = formOneSwitch.isOn
+            view.addSubview(resultButton)
+
+            NSLayoutConstraint.activate([
+                resultButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                resultButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             ])
         default:
             break
