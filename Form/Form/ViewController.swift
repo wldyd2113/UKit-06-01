@@ -7,7 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: view.bounds ,style: .insetGrouped)
+        talbeView.dataSource = self
+        tableView.register(UITableView.self, forCellReuseIdentifier: "cell")
+        return tableView
+    }()
+    
     let formOneLabel = UILabel()
     let formOneTextField = UITextField()
     let formTwoLabel = UILabel()
@@ -19,21 +27,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        setupFormOne()
-        setupFormTwo()
-        setupResults()
-        
-//        formOneTextField.addAction(UIAction { [weak self] _ in
-//            self?.resultLabelOne.text = "폼 #1 = \(self?.formOneTextField.text ?? "")"
-//        }, for: .editingChanged)
-//
-//        formTwoTextField.addAction(UIAction { [weak self] _ in
-//            self?.resultLabelTwo.text = "폼 #2 = \(self?.formTwoTextField.text ?? "")"
-//        }, for: .editingChanged)
-        
-//        formOneTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-//        formTwoTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        view.addSubview(tableView)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        3
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        return cell
     }
     
     // 액션 개체 생성 / 삭제 코드 추가
