@@ -35,6 +35,11 @@ class CustomCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configure(item: Animal) {
+        animalImageView.image = item.image
+        nameLabel.text = item.name
+    }
 }
 
 struct Animal {
@@ -69,8 +74,8 @@ class ViewController: UIViewController, UITableViewDataSource {
 //        config.text = animals[indexPath.row].name
 //        config.image = animals[indexPath.row].image
 //        cell.contentConfiguration = config
-        cell.animalImageView.image = animals[indexPath.row].image
-        cell.nameLabel.text = animals[indexPath.row].name
+        let animal: Animal = animals[indexPath.row]
+        cell.configure(item: animal)
         return cell
     }
 
