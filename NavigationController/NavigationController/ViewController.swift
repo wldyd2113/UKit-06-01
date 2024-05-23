@@ -14,15 +14,15 @@ class ViewController: UIViewController, NextViewControllerDelegate {
 //        둘 다 가능
 //        self.navigationItem.title = "네이게이션 타이틀"
         self.title = "네이게이션 타이틀"
-        self.navigationController?.navigationBar.barStyle = .default
-        self.navigationController?.navigationBar.isTranslucent = true //페어링설정
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.backgroundColor = .systemBrown
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//        let appearence = UINavigationBarAppearance()
-//        appearence.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//        appearence.backgroundColor = .systemBrown
-//        self
+//        self.navigationController?.navigationBar.barStyle = .default
+//        self.navigationController?.navigationBar.isTranslucent = true //페어링설정
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.backgroundColor = .systemBrown
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let appearence = UINavigationBarAppearance()
+        appearence.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        appearence.backgroundColor = .systemBrown
+        self.navigationController?.navigationBar.scrollEdgeAppearance = appearence
         
         let leftButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(leftButtonTapped))
         self.navigationItem.leftBarButtonItem = leftButton
